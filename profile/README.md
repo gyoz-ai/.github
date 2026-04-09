@@ -33,12 +33,17 @@ gyoza is a browser extension powered by AI. Point it at any website, tell it wha
 
 The gyoza extension is our flagship project — a browser extension that turns any website into an AI-navigable workspace. Install it on Chrome or Firefox, point it at any page, and tell it what to do.
 
+The extension is open source under the [FSL-1.1-Apache-2.0](https://github.com/gyoz-ai/web-copilot/blob/main/LICENSE) license — source-available today, fully Apache 2.0 open source from April 2028.
+
+**[gyoz-ai/web-copilot](https://github.com/gyoz-ai/web-copilot)** — the full source code for the gyoza browser extension.
+
 ### Community Projects
 
 Tools and experiments built by the gyoza team and community:
 
 | Repo | Description |
 |---|---|
+| [web-copilot](https://github.com/gyoz-ai/web-copilot) | The gyoza browser extension — AI companion for any website (FSL-1.1-Apache-2.0) |
 | [terminal-chromium-skill](https://github.com/gyoz-ai/terminal-chromium-skill) | Claude Code skill: full Chromium browser in your terminal with CDP |
 | [terminal-chromium](https://github.com/gyoz-ai/terminal-chromium) | Chromium running inside your terminal (Rust) |
 | [terminal-firefox-skill](https://github.com/gyoz-ai/terminal-firefox-skill) | Claude Code skill: Firefox browser in your terminal via Browsh + CDP |
