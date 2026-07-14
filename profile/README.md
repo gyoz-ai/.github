@@ -50,6 +50,32 @@ Tools and experiments built by the gyoza team and community:
 | [auto-research](https://github.com/gyoz-ai/auto-research) | Autonomous skill improvement inspired by Karpathy's autoresearch |
 | [gyoza-recipes](https://github.com/gyoz-ai/gyoza-recipes) | Claude Code plugin for creating gyoza recipes (llms.txt) |
 
+### Agent Harness Suite
+
+A second stack, independent from the browser extension: a coding-agent harness built from two upstream forks plus six purpose-built extensions, all under the `gyoz-ai` org.
+
+**The forks**
+
+- **[herdr](https://github.com/gyoz-ai/herdr)** — terminal multiplexer fork that adds an agent-awareness layer on top: a sidebar rendering live subagents (grouped, sorted running-first), deep-focus navigation between them, and a socket protocol for reporting subagent state from an attached coding agent.
+- **[oh-my-pi](https://github.com/gyoz-ai/oh-my-pi)** — coding agent fork (CLI: `omp`) wired to speak herdr's socket protocol: clickable agent rows and `agent://` links in the TUI, live output tails for running subagents, and deep-focus chords, so herdr can render and navigate what `omp` is doing in real time.
+
+**The extensions**
+
+Six standalone repos — none are forks — that plug into `omp`'s extension/tool/agent loader at runtime, each owning one piece of agent behavior:
+
+| Repo | What it does | Install |
+|---|---|---|
+| [omp-governance](https://github.com/gyoz-ai/omp-governance) | Session-wide engineering rules — dispatch discipline, comment bans, test skip-marker bans, mandatory post-task verification | `omp plugin install github:gyoz-ai/omp-governance` |
+| [omp-bash-guard](https://github.com/gyoz-ai/omp-bash-guard) | Intercepts every `bash` call and blocks or gates dangerous commands (`git push --force`, `rm -rf`, `sudo`, ask-first commands) | `omp plugin install github:gyoz-ai/omp-bash-guard` |
+| [omp-memory](https://github.com/gyoz-ai/omp-memory) | Session-memory system backed by local Typesense — summarizes sessions into searchable facts plus a cross-project user profile | `omp plugin install github:gyoz-ai/omp-memory` |
+| [omp-project-tools](https://github.com/gyoz-ai/omp-project-tools) | Project-agnostic `project_format` and `project_test` tools, auto-detecting Rust vs. TS/JS | `omp plugin install github:gyoz-ai/omp-project-tools` |
+| [omp-ponytail](https://github.com/gyoz-ai/omp-ponytail) | Injects a YAGNI/minimality doctrine into every agent's system prompt, nudging for a pass marker before session end | `omp plugin install github:gyoz-ai/omp-ponytail` |
+| [omp-smith-agent](https://github.com/gyoz-ai/omp-smith-agent) | `omp-smith` subagent role for building and refactoring the extensions above, with the real loader/cutover rules baked in | `git clone https://github.com/gyoz-ai/omp-smith-agent && ln -s "$(pwd)/omp-smith-agent/omp-smith.md" ~/.omp/agent/agents/omp-smith.md` |
+
+**How it composes**
+
+`omp` runs inside a `herdr`-managed pane and reports its live subagent tree over the socket both forks speak, so herdr's sidebar can render and navigate it. Inside `omp`, `omp-governance` and `omp-bash-guard` constrain what the agent is allowed to do, `omp-memory` and `omp-smith-agent` give it continuity and expertise across sessions, `omp-project-tools` gives it stack-agnostic build/test/format commands, and `omp-ponytail` keeps its output lean — six independently upgradable pieces (`git pull`, no redeploy step) composing into one harness.
+
 ### How it works
 
 ```
