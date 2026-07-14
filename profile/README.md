@@ -59,6 +59,10 @@ A second stack, independent from the browser extension: a coding-agent harness b
 - **[herdr](https://github.com/gyoz-ai/herdr)** — terminal multiplexer fork that adds an agent-awareness layer on top: a sidebar rendering live subagents (grouped, sorted running-first), deep-focus navigation between them, and a socket protocol for reporting subagent state from an attached coding agent.
 - **[oh-my-pi](https://github.com/gyoz-ai/oh-my-pi)** — coding agent fork (CLI: `omp`) wired to speak herdr's socket protocol: clickable agent rows and `agent://` links in the TUI, live output tails for running subagents, and deep-focus chords, so herdr can render and navigate what `omp` is doing in real time.
 
+**Running in a container**
+
+**[omp-container](https://github.com/gyoz-ai/oh-my-pi/blob/main/container.md)** — runs `omp` inside Docker from any repo, part of the `oh-my-pi` fork: bidirectionally mounts the repo, auto-provisions its toolchain via [mise](https://mise.jdx.dev/), and bridges herdr's live-status socket through a `socat` relay.
+
 **The extensions**
 
 Six standalone repos — none are forks — that plug into `omp`'s extension/tool/agent loader at runtime, each owning one piece of agent behavior:
