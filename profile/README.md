@@ -76,6 +76,16 @@ Six standalone repos — none are forks — that plug into `omp`'s extension/too
 | [omp-ponytail](https://github.com/gyoz-ai/omp-ponytail) | Injects a YAGNI/minimality doctrine into every agent's system prompt, nudging for a pass marker before session end | `omp plugin install github:gyoz-ai/omp-ponytail` |
 | [omp-smith-agent](https://github.com/gyoz-ai/omp-smith-agent) | `omp-smith` subagent role for building and refactoring the extensions above, with the real loader/cutover rules baked in | `git clone https://github.com/gyoz-ai/omp-smith-agent && ln -s "$(pwd)/omp-smith-agent/omp-smith.md" ~/.omp/agent/agents/omp-smith.md` |
 
+**Recommended third-party herdr plugins**
+
+Not gyoz-ai projects — external `herdr` plugins the team uses and recommends.
+
+| Repo | What it does | Install |
+|---|---|---|
+| [herdr-file-viewer](https://github.com/smarzban/herdr-file-viewer) | Git-aware, read-only file viewer TUI you open in a herdr split pane or tab | `herdr plugin install github:smarzban/herdr-file-viewer` |
+| [Herdr Plus](https://github.com/cloudmanic/herdr-plus) | Projects picker (fuzzy-launch declarative workspace templates) plus a Quick Actions fuzzy script launcher | `herdr plugin install github:cloudmanic/herdr-plus` |
+| [reviewr](https://github.com/persiyanov/reviewr) | Native terminal code-review sidebar pane for herdr | `herdr plugin install github:persiyanov/reviewr` |
+
 **How it composes**
 
 `omp` runs inside a `herdr`-managed pane and reports its live subagent tree over the socket both forks speak, so herdr's sidebar can render and navigate it. Inside `omp`, `omp-governance` and `omp-bash-guard` constrain what the agent is allowed to do, `omp-memory` and `omp-smith-agent` give it continuity and expertise across sessions, `omp-project-tools` gives it stack-agnostic build/test/format commands, and `omp-ponytail` keeps its output lean — six independently upgradable pieces (`git pull`, no redeploy step) composing into one harness.
